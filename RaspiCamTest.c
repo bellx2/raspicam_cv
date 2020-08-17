@@ -25,7 +25,7 @@ int main(int argc, char *argv[ ]){
 
 	int opt;
 
-	while ((opt = getopt(argc, argv, "lxm")) != -1)
+	while ((opt = getopt(argc, argv, "lxmh:v:r:e:")) != -1)
 	{
 		switch (opt)
 		{
@@ -40,11 +40,27 @@ int main(int argc, char *argv[ ]){
 			case 'm':					// monochrome
 				config->monochrome = 1;
 				break;
+			case 'h':
+				config->hflip = atoi(optarg);
+				break;
+			case 'v':
+				config->vflip = atoi(optarg);
+				break;
+			case 'r':
+				config->rotation = atoi(optarg);
+				break;
+			case 'e':
+				config->exposure = atoi(optarg);
+				break;
 			default:
-				fprintf(stderr, "Usage: %s [-x] [-l] [-m] \n", argv[0], opt);
+				fprintf(stderr, "Usage: %s [opt] \n", argv[0], opt);
 				fprintf(stderr, "-l: Large mode\n");
 				fprintf(stderr, "-x: Extra large mode\n");
-				fprintf(stderr, "-l: Monochrome mode\n");
+				fprintf(stderr, "-m: Monochrome mode\n");
+				fprintf(stderr, "-h: hFlip\n");
+				fprintf(stderr, "-v: vFlip\n");
+				fprintf(stderr, "-r: Rotate\n");
+				fprintf(stderr, "-e [-24~24]: Set Exposure\n");
 				exit(EXIT_FAILURE);
 		}
 	}
